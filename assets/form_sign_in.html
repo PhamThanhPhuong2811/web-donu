@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/font/fontawesome-free-6.2.0-web/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/img/logo1.png">
+    <script src="../assets/js/jquery-3.6.1.min.js"></script>
+    <title>ĐĂNG NHẬP</title>
+    <script>
+          /////// kiem tra ten dang nhap
+        $(document).ready(function () {
+      function kiemTraDN() {
+        var kt = /^[A-z_](\w|\s|\.|_){5,32}$/;
+        if ($("#myUserName").val() == "") {
+          $("#ktDN").html("*Bắt buộc nhập !!");
+          return false;
+        }
+        if (!kt.test($("#myUserName").val())) {
+          $("#ktDN").html("*Chữ cái đầu của mỗi từ phải viết hoa!!");
+          return false;
+        }
+        $("#ktDN").html("*");
+        return true;
+        }
+        $("#myUserName").blur(kiemTraDN);
+
+
+        ////////////// kiem tra mk
+
+        function kiemTraMK() {
+        var kt = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+        if ($("#myPassword").val() == "") {
+          $("#ktMK").html("*Bắt buộc nhập !!");
+          return false;
+        }
+        if (!kt.test($("#myPassword").val())) {
+          $("#ktMK").html("*Tối thiểu 6-8 ký tự, ít nhất một chữ cái, một số và một ký tự đặc biệt!!");
+          return false;
+        }
+        $("#ktMK").html("*");
+        return true;
+        }
+        $("#myPassword").blur(kiemTraMK);
+
+        $("#btn-signin").click(function() {
+              if(!kiemTraDN() || !kiemTraMK()) {
+                alert("Bạn nhập sai hoặc thiếu thông tin vui lòng nhập lại !!");
+                return false;
+              }
+              else {
+                alert("Đăng nhập thành công");
+                return true;
+              }
+            })
+      });
+    
+    </script>
+    <style>
+        .lg{
+            width:50px;
+            height:50px;
+            margin-top: -15px;
+        }
+        .form-heading{
+            text-align: center;
+            font-size: 35px;
+            margin-right: 50px;
+        }
+        .form-input{
+        font-size: 18px;
+        margin-bottom: 5px;
+        }
+        .form-submit{
+            font-size: 18px;
+            margin-top: 5px;
+            background-color: #4f7344;
+        }
+    </style>
+</head>
+<body>
+    <!-- <img style="position:absolute ;" width="150px" height="200px" id="img-logo" src="./assets/img/310445250_1388272811699963_8474388707387797383_n.png" alt=""> -->
+    <div id="wrapper">
+        <form action="" id="form-login">
+            <div class="logo">
+                <a href="../assets/index.html"><img src="../assets/img/logo1.png" alt="" class="lg"></a>
+            </div>
+            <h1 class="form-heading">Đăng Nhập</h1>
+            <div class="form-group">
+                <i class="far fa-user"></i>
+                <input type="text" class="form-input" id="myUserName" placeholder="Tên đăng nhập">
+                <div>
+                <span id="ktDN"></span>
+            </div>
+            </div>
+            <div class="form-group">
+                <i class="fas fa-key"></i>
+                <input type="password" class="form-input" id="myPassword" placeholder="Mật khẩu">
+                <div>
+                    <span id="ktMK"></span>
+                </div>
+            </div>
+            <input type="submit" value="Đăng Nhập" class="form-submit" id="btn-signin">   
+            <div id="sign-in">
+                <a style="color:white ;margin-top: 8px;font-size: 18px;" href="../assets/form_dki.html" class="nav-link" id="btnModal">Đăng ký</a>
+                <a href="sign-in" style="margin-top: 8px;font-size: 18px;" class="">Quên mật khẩu</a>
+            </div>
+            <div style="font-size: 18px;width: 100%; text-align: center;" >
+                <span>---Hoặc---</span>
+                <p>
+                    <img width="129px" height="37px" style="margin-top:10px" src="https://bizweb.dktcdn.net/assets/admin/images/login/fb-btn.svg
+                " alt="fb-login">
+                    <img width="129px" height="37px" style="margin-top:10px"  src="https://bizweb.dktcdn.net/assets/admin/images/login/gp-btn.svg
+                " alt="gg-login">
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+
+</html>

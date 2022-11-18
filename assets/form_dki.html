@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ĐĂNG KÝ</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <script src="../assets/js/jquery-3.6.1.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../assets/css/css.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/img/logo1.png">
+  
+    <script>
+        /////// kiem tra ten dang nhap
+        $(document).ready(function () {
+      function kiemTraDN() {
+        var kt = /^[A-z_](\w|\s|\.|_){5,32}$/;
+        if ($("#myUserName").val() == "") {
+          $("#ktDN").html("*Bắt buộc nhập !!");
+          return false;
+        }
+        if (!kt.test($("#myUserName").val())) {
+          $("#ktDN").html("*Chữ cái đầu của mỗi từ phải viết hoa!!");
+          return false;
+        }
+        $("#ktDN").html("*");
+        return true;
+        }
+        $("#myUserName").blur(kiemTraDN);
+
+        ////////////// kiem tra mk
+
+        function kiemTraMK() {
+        var kt = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+        if ($("#myPassword").val() == "") {
+          $("#ktMK").html("*Bắt buộc nhập !!");
+          return false;
+        }
+        if (!kt.test($("#myPassword").val())) {
+          $("#ktMK").html("*Tối thiểu 6-8 ký tự, ít nhất một chữ cái, một số và một ký tự đặc biệt!!");
+          return false;
+        }
+        $("#ktMK").html("*");
+        return true;
+        }
+        $("#myPassword").blur(kiemTraMK);
+
+        //////////// kiem tra nhap lại mk
+
+  function kiemTraMK2() {
+    if ($("#myPassword-check").val() == "") {
+      $("#ktMK2").html("Bắt buộc nhập !!");
+      return false;
+    }
+    if (($("#myPassword-check").val()) !== ($("#myPassword").val())) {
+      $("#ktMK2").html("Mật khẩu phải trùng!!");
+      return false;
+    }
+    $("#ktMK2").html("*");
+    return true;
+  }
+  $("#myPassword-check").blur(kiemTraMK2);
+
+        //////////////////// kiem tra ho ten
+
+        function kiemTraHT() {
+        var kt = /(^[A-Z]{1})([a-z]+)(\s[A-Z]{1}([a-z]+))*$/;
+        if($("#myName").val() == ""){
+            $("#tbTen").html("*Bắt buộc nhập !!");
+            return false;
+        }
+        if(!kt.test($("#myName").val())){
+            $("#tbTen").html("*Chữ cái đầu của mỗi từ phải viết hoa!!");
+            return false;
+        }
+        $("#tbTen").html("*");
+        return true;
+        }
+        $("#myName").blur(kiemTraHT);
+
+        //////////////////// kiem tra dia chi
+
+          function kiemTraDC() {
+      var kt =  /(^[A-Za-z0-9-]+)(\s[A-Za-z0-9-]+)*$/;
+      if($("#myAddress").val() == ""){
+          $("#tbDC").html("Bắt buộc nhập !!");
+          return false;
+      }
+      if(!kt.test($("#myAddress").val())){
+          $("#tbDC").html("Nhập sai địa chỉ !!");
+          return false;
+      }
+      $("#tbDC").html("*");
+      return true;
+      }
+      $("#myAddress").blur(kiemTraDC);
+
+          /////////////////////// ktra sdt
+          function kiemTraPhone() {
+      var kt =  /^(0[13789][0-9]{8}|1[89]00[0-9]{4})$/;
+      if($("#myPhone").val() == ""){
+          $("#tbSdt").html("Bắt buộc nhập !!");
+          return false;
+      }
+      if(!kt.test($("#myPhone").val())){
+          $("#tbSdt").html("Bắt đầu là 01 | 03 | 07 | 08 | 09 bao gồm 10 số !!");
+          return false;
+      }
+      $("#tbSdt").html("*");
+      return true;
+      }
+      $("#myPhone").blur(kiemTraPhone);
+
+          ///////////////////////
+
+          function kiemTraEmail() {
+            var kt =  /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+            if($("#myEmail").val() == ""){
+                $("#tbEmail").html("*Bắt buộc nhập !!");
+                return false;
+            }
+            if(!kt.test($("#myEmail").val())){
+                $("#tbEmail").html("*Nhập sai email!!");
+                return false;
+            }
+            $("#tbEmail").html("*");
+            return true;
+            }
+            $("#myEmail").blur(kiemTraEmail);
+
+            function kiemTraNgaySinh() {
+        if ($("#txtNS").val() == "") {
+            $("#tbNS").html("* Bắt buộc nhập");
+            return false;
+        }
+        var year = new Date($("#txtNS").val());
+        var today = new Date();
+        today.setFullYear(today.getFullYear());
+        if ((today - year) < 14) {
+            $("#tbNS").html("* Phải trên 14 tuổi");
+            return false;
+        }
+        $("#tbNS").html("*");
+        return true;
+    }
+    $("#txtNS").blur(kiemTraNgaySinh);
+  
+            $("#btn-signup").click(function() {
+              if(!kiemTraDN() || !kiemTraMK() || !kiemTraMK2() || !kiemTraPhone() || !kiemTraDC() || !kiemTraEmail() || !kiemTraHT()) {
+                alert("Bạn nhập sai hoặc thiếu thông tin vui lòng nhập lại !!");
+                return false;
+              }
+              else {
+                alert("Đăng kí thành công");
+                return true;
+              }
+            })
+      });
+    </script>
+</head>
+<style>
+    body{
+        background-image: url(../assets/img/background_dangki.jpg) ;
+        background-size: cover;
+
+    }
+    .container{
+    width: 1000px;
+    height: 850px;
+    float: right;
+    margin-right: 150px;
+    padding-left: 200px;
+    padding-top: 20px;
+    color: #141A46;
+}
+#login{
+margin-left: 30px;
+border: 1px solid #000;
+background-color: #4f7344;
+border-radius: 5px;
+padding: 10px;
+color: #fff;
+}
+label{
+    font-size: 18px;
+}
+</style>
+<body>
+    <div class="wrapper">
+            <a id="login" href="../assets/form_sign_in.html">Đăng Nhập</a>
+        <div class="container">
+            <section>
+                <h2>ĐĂNG KÍ TÀI KHOẢN</h2>
+                <form action="" class="row">
+                    <div class="form-group">
+                        <br>
+                        <label for="myName">Tên đăng nhập:</label>
+                        <input type="text" id="myUserName" class="form-control" size="80px" placeholder="Nhập tên đăng nhập">
+                        <div id="eye">
+                         <i class="fas fa-eye" id="ktDN"></i>
+                        </div>
+                        <!--  -->
+                        <br>
+                        <label for="myPassword">Mật khẩu:</label>
+                        <input type="password" id="myPassword" class="form-control" placeholder="Nhập mật khẩu">
+                        <div id="eye">
+                            <i class="fas fa-eye" id="ktMK"></i>
+                        </div>
+                        <!--  -->
+                        <label for="myPassword">Nhập lại mật khẩu:</label>
+                        <input type="password" id="myPassword-check" class="form-control" placeholder="Nhập lại mật khẩu">
+                        <div id="eye">
+                            <i class="fas fa-eye" id="ktMK2"></i>
+                        </div>
+                       
+                       
+                       
+                        <!--  -->
+                        <br>
+                        <h4 style="text-align:center;color:#fff"> THÔNG TIN CÁ NHÂN</h4>
+                        <!--  -->
+                        <label for="myName">Họ và tên:</label>
+                        <input type="text" id="myName" class="form-control" size="80px" placeholder="Nhập họ và tên">
+                        <div id="eye">
+                            <i class="fas fa-eye" id="tbTen"></i>
+                        </div>
+                        <!--  -->
+                        <label for="myDate">Ngày sinh:</label>
+                        <input type="date" id="txtNS" class="form-control" size="80px" placeholder="dd------yyyy">
+                        <div id="eye">
+                            <i class="fas fa-eye" id="tbNS"></i>
+                        </div>
+                        <!--  -->
+                        <label for="myDate">Giới Tính:</label> <br>
+                        <input type="radio" name="GT" value="GT1" >Nam <input type="radio" name="GT" value="GT" >Nữ <br> 
+                        <!--  -->
+                        <label for="myName">Địa chỉ:</label>
+                        <input type="text" id="myAddress" class="form-control" size="80px" placeholder="Nhập địa chỉ"> 
+                        <div id="eye">
+                            <i class="fas fa-eye" id="tbDC"></i>
+                        </div>
+                        <!--  -->
+                        <label for="myName">Điện thoại:</label>
+                        <input type="text" name="myPhone" id="myPhone" class="form-control" size="80px" placeholder="Nhập số điện thoại">
+                        <div id="eye">
+                            <i class="fas fa-eye" id="tbSdt"></i>
+                        </div>
+                        <!--  --> 
+                        <label for="myEmail">Email</label>
+                        <input type="email" id="myEmail" class="form-control"  placeholder="Nhập Email">
+                        <div id="eye">
+                            <i class="fas fa-eye" id="tbEmail"></i>
+                        </div>
+                        <!--  -->
+                        <div style="color: #141A46; text-align: left;">
+                            <input type="checkbox" class="form-input"> Bạn đồng ý với các điều khoản và dịch vụ của Shop
+                        </div>
+                        <br>
+                        <!--  -->
+                        <button style="color: white; background-color: #4f7344;" type="submit" id="btn-signup" class="btn btn-primary">Đăng kí</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>
